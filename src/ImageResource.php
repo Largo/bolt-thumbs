@@ -39,7 +39,7 @@ class ImageResource
      */
     public function __construct($resource, Image\Type $type = null, Image\Info $info = null)
     {
-        if (!is_resource($resource) || !get_resource_type($resource) === 'gd') {
+        if (!$resource instanceof \GDImage && (!is_resource($resource) || 'gd' !== get_resource_type($resource))) { 
             throw new InvalidArgumentException('Given resource must be a GD resource');
         }
         $this->resource = $resource;
